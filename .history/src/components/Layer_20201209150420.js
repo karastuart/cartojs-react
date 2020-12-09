@@ -21,6 +21,7 @@ class Layer extends Component {
 
     const cartoSource = new carto.source.SQL(source);
     const cartoStyle = new carto.style.CartoCSS(style);
+
     this.layer = new carto.layer.Layer(cartoSource, cartoStyle);
     this.setVisibility(hidden)
   }

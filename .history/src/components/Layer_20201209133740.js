@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import carto from 'carto.js';
+import carto from '@cartocarto.js';
 
 class Layer extends Component {
   static contextTypes = {
@@ -21,6 +21,7 @@ class Layer extends Component {
 
     const cartoSource = new carto.source.SQL(source);
     const cartoStyle = new carto.style.CartoCSS(style);
+
     this.layer = new carto.layer.Layer(cartoSource, cartoStyle);
     this.setVisibility(hidden)
   }
@@ -31,9 +32,9 @@ class Layer extends Component {
     client.addLayer(this.layer);
     client.getLeafletLayer().addTo(this.context.map);
   }
-  componentWillUnmount() {
-    const { client } = this.props;
-    client.removeLayer(this.layer);
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.style !== this.props.style || nextProps.hidden !== this.props.hidden;
   }
 
   setVisibility = isHidden => {
@@ -41,6 +42,11 @@ class Layer extends Component {
   }
 
   render() {
+    const { hidden, style } = this.props;
+    const layerStyle = this.layer.getStyle();
+
+    layerStyle.setContent(style).then(() => this.setVisibility(hidden));
+
     return null;
   }
 }

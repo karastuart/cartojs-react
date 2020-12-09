@@ -4,8 +4,9 @@ import { Map, TileLayer as Basemap } from 'react-leaflet';
 import carto from 'carto.js';
 import Layer from './components/Layer';
 import timecities from './data/timecities';
+import utils from './utils/index';
 import './index.css';
-
+import Switch from '@material-ui/core/Switch';
 
 const CARTO_BASEMAP = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png';
 
@@ -24,6 +25,11 @@ class App extends Component {
     this.setState({ nativeMap: this.nativeMap });
   }
 
+  // The widget returns an histogram, so we update the layer asigning a color to each histogram bin
+  onHistogramChanged(data) {
+    const newStyle = utils.buildStyle(data);
+    this.setState({ layerStyle: newStyle, hidelayers: false })
+  }
   onCheck(e) {
     this.setState({
       checked: !this.state.checked

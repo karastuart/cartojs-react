@@ -4,8 +4,10 @@ import { Map, TileLayer as Basemap } from 'react-leaflet';
 import carto from 'carto.js';
 import Layer from './components/Layer';
 import timecities from './data/timecities';
+// import utils from './utils/index';
 import './index.css';
-
+import Switch from '@material-ui/core/Switch';
+import { Button } from '@material-ui/core'
 
 const CARTO_BASEMAP = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png';
 
@@ -38,6 +40,7 @@ class App extends Component {
 
       <main>
         <div>
+          <Switch />
           <label className="switch">
             <input
               type="checkbox"

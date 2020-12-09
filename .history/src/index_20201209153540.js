@@ -4,6 +4,7 @@ import { Map, TileLayer as Basemap } from 'react-leaflet';
 import carto from 'carto.js';
 import Layer from './components/Layer';
 import timecities from './data/timecities';
+// import utils from './utils/index';
 import './index.css';
 
 
@@ -23,6 +24,8 @@ class App extends Component {
   componentDidMount() {
     this.setState({ nativeMap: this.nativeMap });
   }
+
+  // The widget returns an histogram, so we update the layer asigning a color to each histogram bin
 
   onCheck(e) {
     this.setState({
